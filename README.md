@@ -2,11 +2,11 @@
 Module reloading for plugin developers
 
 ## Features
-[x] Add module to the stack
-[x] Reload one module or all from the stack
-[] Remove module from the stack
-[] figure out sub modules
-[] Split `:ReloadModule` to `:ReloadModule` and `:ReloadModuleAll`
+- [x] Add module to the stack
+- [x] Reload one module or all from the stack
+- [] Remove module from the stack
+- [] figure out sub modules
+- [] Split `:ReloadModule` to `:ReloadModule` and `:ReloadModuleAll`
 
 ## Installation
 ### [packer.nvim](https://github.com/wbthomason/packer.nvim)
