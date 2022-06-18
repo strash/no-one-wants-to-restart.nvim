@@ -22,7 +22,7 @@ Plug "strash/no-one-wants-to-restart.nvim"
 1. Call `:ReloadModuleAdd module-name` or just `:ReloadModuleAdd` from module to add the module to the stack
 2. See what module in the stack with `:ReloadModuleList`
 3. Reload module when it's time with `:ReloadModule module-name` to reload this
-   module or use `:ReloadModule` to reload all modules from the stack. Use <TAB>
+   module or use `:ReloadModule` to reload all modules from the stack. Use `<TAB>`
    for completein
 
 ## Commands
