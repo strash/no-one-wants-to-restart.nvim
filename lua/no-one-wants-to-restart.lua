@@ -1,5 +1,9 @@
 local M = {}
 
+-- TODO: remove module
+-- TODO: figure out sub modules
+-- TODO: ReloadModuleAll and ReloadModule
+
 M.modules = {}
 
 --- add module
@@ -47,6 +51,7 @@ M.reload = function(args)
 	end
 end
 
+--- list of modules
 M.list = function()
 	for _, v in ipairs(M.modules) do
 		print(v)
@@ -55,39 +60,5 @@ M.list = function()
 		print("There is no modules. Add module with ':ReloadModuleAdd <args>?'")
 	end
 end
-
-vim.api.nvim_create_user_command("ReloadModuleAdd",
-	function(opts)
-		if #opts.args == 0 then
-			M.add_module(nil)
-		else
-			M.add_module(opts.args)
-		end
-	end,
-	{ nargs = "?" }
-)
-
-vim.api.nvim_create_user_command("ReloadModule",
-	function(opts)
-		if #opts.args == 0 then
-			M.reload(nil)
-		else
-			M.reload(opts.args)
-		end
-	end,
-	{
-		nargs = "?",
-		complete = function(_, _, _)
-			return M.modules
-		end,
-	}
-)
-
-vim.api.nvim_create_user_command("ReloadModuleList",
-	function(_)
-		M.list()
-	end,
-	{ nargs = 0 }
-)
 
 return M
