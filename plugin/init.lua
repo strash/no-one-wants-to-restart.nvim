@@ -13,11 +13,23 @@ local function set_commands()
 	)
 
 	vim.api.nvim_create_user_command("ReloadModule",
+		function()
+			reload_module.reload()
+		end,
+		{
+			nargs = "?",
+			complete = function(_, _, _)
+				return reload_module.modules
+			end,
+		}
+	)
+
+	vim.api.nvim_create_user_command("ReloadModule",
 		function(opts)
 			if #opts.args == 0 then
-				reload_module.reload(nil)
+				reload_module.reload()
 			else
-				reload_module.reload(opts.args)
+				reload_module.reload()
 			end
 		end,
 		{

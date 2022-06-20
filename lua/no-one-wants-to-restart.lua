@@ -1,15 +1,16 @@
 local M = {}
 
--- TODO: remove module
+-- TODO: ReloadModuleRemove module
 -- TODO: figure out sub modules
 -- TODO: ReloadModuleAll and ReloadModule
 -- TODO: in plugin/init.lua check if autogroup is not exist then add from some
+-- DONE: print if module not found when reloading
 -- events
 
 M.modules = {}
 
 --- add module
-M.add_module = function(args)
+function M.add_module(args)
 	local current_module_name = args
 	local is_module_exist = false
 	if current_module_name == nil then
@@ -30,37 +31,59 @@ M.add_module = function(args)
 	end
 end
 
+-- helper
 local function _reload(value)
 	if package.loaded[value] ~= nil then
 		package.loaded[value] = nil
-		require(value)
+		package.loaded[value] = require(value)
 		print("Module '" .. value .. "' reloaded")
+	else
+		print("Module '" .. value .. "' not found")
+	end
+end
+
+-- reload one module
+function M:reload_one(args)
+	if args ~= nil then
+		_reload(args)
 	end
 end
 
 --- reload modules
-M.reload = function(args)
-	local current_module_name = args
-	if current_module_name ~= nil then
-		_reload(current_module_name)
-	else
-		for _, v in ipairs(M.modules) do
-			_reload(v)
-		end
+function M.reload()
+	for _, v in ipairs(M.modules) do
+		_reload(v)
 	end
 	if #M.modules == 0 then
-		print("There is no modules to reload. Add module with ':ReloadModuleAdd <args>?'")
+		print("There is no modules to reload. Add module with ':ReloadModuleAdd [module-name]'")
 	end
 end
 
 --- list of modules
-M.list = function()
-	for _, v in ipairs(M.modules) do
-		print(v)
+function M.list()
+	print("Modules:")
+	for i, v in ipairs(M.modules) do
+		if i < #M.modules then
+			print(v .. ",")
+		else
+			print(v)
+		end
 	end
 	if #M.modules == 0 then
-		print("There is no modules. Add module with ':ReloadModuleAdd <args>?'")
+		print("There is no modules. Add module with ':ReloadModuleAdd [module-name]'")
 	end
 end
+
+--local lua_dirs = vim.api.nvim_get_runtime_file("lua/", true)
+--local plugin_dirs = vim.api.nvim_get_runtime_file("plugin/", true)
+--vim.pretty_print(plugin_dirs)
+--local paths = vim.api.nvim_list_runtime_paths()
+--for _, m in ipairs(M.modules) do
+--	for _, v in ipairs(paths) do
+--		if v:find(m) then
+--			print(v)
+--		end
+--	end
+--end
 
 return M
