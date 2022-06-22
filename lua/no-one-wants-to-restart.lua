@@ -2,10 +2,9 @@ local M = {}
 
 -- TODO: ReloadModuleRemove module
 -- TODO: figure out sub modules
--- TODO: ReloadModuleAll and ReloadModule
 -- TODO: in plugin/init.lua check if autogroup is not exist then add from some
--- DONE: print if module not found when reloading
--- events
+-- DONE: ReloadModuleAll and ReloadModule
+-- DONE: print if module not found when reloading events
 
 M.modules = {}
 

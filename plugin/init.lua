@@ -24,19 +24,14 @@ local function set_commands()
 		}
 	)
 
-	vim.api.nvim_create_user_command("ReloadModule",
+	vim.api.nvim_create_user_command("ReloadModuleAll",
 		function(opts)
 			if #opts.args == 0 then
-				reload_module.reload()
-			else
-				reload_module.reload()
+				reload_module:reload_one(opts)
 			end
 		end,
 		{
-			nargs = "?",
-			complete = function(_, _, _)
-				return reload_module.modules
-			end,
+			nargs = 0,
 		}
 	)
 
