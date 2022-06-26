@@ -1,6 +1,8 @@
 # No one wants to restart neovim
 Module reloading for plugin developers
 
+> Important! This plugin is not ready to use
+
 ## Features
 - [x] Add module to the stack
 - [x] Reload one module or all from the stack
